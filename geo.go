@@ -16,6 +16,8 @@ import (
 	"github.com/pquerna/ffjson/ffjson"
 )
 
+//go:generate ffjson geo.go
+
 // rapidapi contains the API key to access rapidapi
 var rapidapi string
 var ipstackeapi string
@@ -30,8 +32,6 @@ func SetRapidAPI(key string) {
 func SetIPStackAPI(key string) {
 	ipstackeapi = key
 }
-
-//go:generate ffjson geo.go
 
 type (
 	Nominatim struct {

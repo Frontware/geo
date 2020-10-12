@@ -5,6 +5,7 @@ package geo
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	fflib "github.com/pquerna/ffjson/fflib/v1"
 )
@@ -372,6 +373,802 @@ handle_Region:
 
 			j.Region = string(string(outBuf))
 
+		}
+	}
+
+	state = fflib.FFParse_after_value
+	goto mainparse
+
+wantedvalue:
+	return fs.WrapErr(fmt.Errorf("wanted value token, but got token: %v", tok))
+wrongtokenerror:
+	return fs.WrapErr(fmt.Errorf("ffjson: wanted token: %v, but got token: %v output=%s", wantedTok, tok, fs.Output.String()))
+tokerror:
+	if fs.BigError != nil {
+		return fs.WrapErr(fs.BigError)
+	}
+	err = fs.Error.ToError()
+	if err != nil {
+		return fs.WrapErr(err)
+	}
+	panic("ffjson-generated: unreachable, please report bug.")
+done:
+
+	return nil
+}
+
+// MarshalJSON marshal bytes to json - template
+func (j *IPLocation) MarshalJSON() ([]byte, error) {
+	var buf fflib.Buffer
+	if j == nil {
+		buf.WriteString("null")
+		return buf.Bytes(), nil
+	}
+	err := j.MarshalJSONBuf(&buf)
+	if err != nil {
+		return nil, err
+	}
+	return buf.Bytes(), nil
+}
+
+// MarshalJSONBuf marshal buff to json - template
+func (j *IPLocation) MarshalJSONBuf(buf fflib.EncodingBuffer) error {
+	if j == nil {
+		buf.WriteString("null")
+		return nil
+	}
+	var err error
+	var obj []byte
+	_ = obj
+	_ = err
+	buf.WriteString(`{"city":`)
+	/* Interface types must use runtime reflection. type=interface {} kind=interface */
+	err = buf.Encode(j.City)
+	if err != nil {
+		return err
+	}
+	buf.WriteString(`,"continent_code":`)
+	fflib.WriteJsonString(buf, string(j.ContinentCode))
+	buf.WriteString(`,"continent_name":`)
+	fflib.WriteJsonString(buf, string(j.ContinentName))
+	buf.WriteString(`,"country_code":`)
+	fflib.WriteJsonString(buf, string(j.CountryCode))
+	buf.WriteString(`,"country_name":`)
+	fflib.WriteJsonString(buf, string(j.CountryName))
+	buf.WriteString(`,"ip":`)
+	fflib.WriteJsonString(buf, string(j.IP))
+	buf.WriteString(`,"latitude":`)
+	fflib.FormatBits2(buf, uint64(j.Latitude), 10, j.Latitude < 0)
+	/* Inline struct. type=struct { CallingCode string "json:\"calling_code\""; Capital string "json:\"capital\""; CountryFlag string "json:\"country_flag\""; CountryFlagEmoji string "json:\"country_flag_emoji\""; CountryFlagEmojiUnicode string "json:\"country_flag_emoji_unicode\""; GeonameId interface {} "json:\"geoname_id\""; IsEu bool "json:\"is_eu\""; Languages []struct { Code string "json:\"code\""; Name string "json:\"name\""; Native string "json:\"native\"" } "json:\"languages\"" } kind=struct */
+	buf.WriteString(`,"location":{ "calling_code":`)
+	fflib.WriteJsonString(buf, string(j.Location.CallingCode))
+	buf.WriteString(`,"capital":`)
+	fflib.WriteJsonString(buf, string(j.Location.Capital))
+	buf.WriteString(`,"country_flag":`)
+	fflib.WriteJsonString(buf, string(j.Location.CountryFlag))
+	buf.WriteString(`,"country_flag_emoji":`)
+	fflib.WriteJsonString(buf, string(j.Location.CountryFlagEmoji))
+	buf.WriteString(`,"country_flag_emoji_unicode":`)
+	fflib.WriteJsonString(buf, string(j.Location.CountryFlagEmojiUnicode))
+	buf.WriteString(`,"geoname_id":`)
+	/* Interface types must use runtime reflection. type=interface {} kind=interface */
+	err = buf.Encode(j.Location.GeonameId)
+	if err != nil {
+		return err
+	}
+	if j.Location.IsEu {
+		buf.WriteString(`,"is_eu":true`)
+	} else {
+		buf.WriteString(`,"is_eu":false`)
+	}
+	buf.WriteString(`,"languages":`)
+	if j.Location.Languages != nil {
+		buf.WriteString(`[`)
+		for i, v := range j.Location.Languages {
+			if i != 0 {
+				buf.WriteString(`,`)
+			}
+			/* Inline struct. type=struct { Code string "json:\"code\""; Name string "json:\"name\""; Native string "json:\"native\"" } kind=struct */
+			buf.WriteString(`{ "code":`)
+			fflib.WriteJsonString(buf, string(v.Code))
+			buf.WriteString(`,"name":`)
+			fflib.WriteJsonString(buf, string(v.Name))
+			buf.WriteString(`,"native":`)
+			fflib.WriteJsonString(buf, string(v.Native))
+			buf.WriteByte('}')
+		}
+		buf.WriteString(`]`)
+	} else {
+		buf.WriteString(`null`)
+	}
+	buf.WriteByte('}')
+	buf.WriteString(`,"longitude":`)
+	fflib.FormatBits2(buf, uint64(j.Longitude), 10, j.Longitude < 0)
+	buf.WriteString(`,"region_code":`)
+	/* Interface types must use runtime reflection. type=interface {} kind=interface */
+	err = buf.Encode(j.RegionCode)
+	if err != nil {
+		return err
+	}
+	buf.WriteString(`,"region_name":`)
+	/* Interface types must use runtime reflection. type=interface {} kind=interface */
+	err = buf.Encode(j.RegionName)
+	if err != nil {
+		return err
+	}
+	buf.WriteString(`,"type":`)
+	fflib.WriteJsonString(buf, string(j.Type))
+	buf.WriteString(`,"zip":`)
+	/* Interface types must use runtime reflection. type=interface {} kind=interface */
+	err = buf.Encode(j.Zip)
+	if err != nil {
+		return err
+	}
+	buf.WriteByte('}')
+	return nil
+}
+
+const (
+	ffjtIPLocationbase = iota
+	ffjtIPLocationnosuchkey
+
+	ffjtIPLocationCity
+
+	ffjtIPLocationContinentCode
+
+	ffjtIPLocationContinentName
+
+	ffjtIPLocationCountryCode
+
+	ffjtIPLocationCountryName
+
+	ffjtIPLocationIP
+
+	ffjtIPLocationLatitude
+
+	ffjtIPLocationLocation
+
+	ffjtIPLocationLongitude
+
+	ffjtIPLocationRegionCode
+
+	ffjtIPLocationRegionName
+
+	ffjtIPLocationType
+
+	ffjtIPLocationZip
+)
+
+var ffjKeyIPLocationCity = []byte("city")
+
+var ffjKeyIPLocationContinentCode = []byte("continent_code")
+
+var ffjKeyIPLocationContinentName = []byte("continent_name")
+
+var ffjKeyIPLocationCountryCode = []byte("country_code")
+
+var ffjKeyIPLocationCountryName = []byte("country_name")
+
+var ffjKeyIPLocationIP = []byte("ip")
+
+var ffjKeyIPLocationLatitude = []byte("latitude")
+
+var ffjKeyIPLocationLocation = []byte("location")
+
+var ffjKeyIPLocationLongitude = []byte("longitude")
+
+var ffjKeyIPLocationRegionCode = []byte("region_code")
+
+var ffjKeyIPLocationRegionName = []byte("region_name")
+
+var ffjKeyIPLocationType = []byte("type")
+
+var ffjKeyIPLocationZip = []byte("zip")
+
+// UnmarshalJSON umarshall json - template of ffjson
+func (j *IPLocation) UnmarshalJSON(input []byte) error {
+	fs := fflib.NewFFLexer(input)
+	return j.UnmarshalJSONFFLexer(fs, fflib.FFParse_map_start)
+}
+
+// UnmarshalJSONFFLexer fast json unmarshall - template ffjson
+func (j *IPLocation) UnmarshalJSONFFLexer(fs *fflib.FFLexer, state fflib.FFParseState) error {
+	var err error
+	currentKey := ffjtIPLocationbase
+	_ = currentKey
+	tok := fflib.FFTok_init
+	wantedTok := fflib.FFTok_init
+
+mainparse:
+	for {
+		tok = fs.Scan()
+		//	println(fmt.Sprintf("debug: tok: %v  state: %v", tok, state))
+		if tok == fflib.FFTok_error {
+			goto tokerror
+		}
+
+		switch state {
+
+		case fflib.FFParse_map_start:
+			if tok != fflib.FFTok_left_bracket {
+				wantedTok = fflib.FFTok_left_bracket
+				goto wrongtokenerror
+			}
+			state = fflib.FFParse_want_key
+			continue
+
+		case fflib.FFParse_after_value:
+			if tok == fflib.FFTok_comma {
+				state = fflib.FFParse_want_key
+			} else if tok == fflib.FFTok_right_bracket {
+				goto done
+			} else {
+				wantedTok = fflib.FFTok_comma
+				goto wrongtokenerror
+			}
+
+		case fflib.FFParse_want_key:
+			// json {} ended. goto exit. woo.
+			if tok == fflib.FFTok_right_bracket {
+				goto done
+			}
+			if tok != fflib.FFTok_string {
+				wantedTok = fflib.FFTok_string
+				goto wrongtokenerror
+			}
+
+			kn := fs.Output.Bytes()
+			if len(kn) <= 0 {
+				// "" case. hrm.
+				currentKey = ffjtIPLocationnosuchkey
+				state = fflib.FFParse_want_colon
+				goto mainparse
+			} else {
+				switch kn[0] {
+
+				case 'c':
+
+					if bytes.Equal(ffjKeyIPLocationCity, kn) {
+						currentKey = ffjtIPLocationCity
+						state = fflib.FFParse_want_colon
+						goto mainparse
+
+					} else if bytes.Equal(ffjKeyIPLocationContinentCode, kn) {
+						currentKey = ffjtIPLocationContinentCode
+						state = fflib.FFParse_want_colon
+						goto mainparse
+
+					} else if bytes.Equal(ffjKeyIPLocationContinentName, kn) {
+						currentKey = ffjtIPLocationContinentName
+						state = fflib.FFParse_want_colon
+						goto mainparse
+
+					} else if bytes.Equal(ffjKeyIPLocationCountryCode, kn) {
+						currentKey = ffjtIPLocationCountryCode
+						state = fflib.FFParse_want_colon
+						goto mainparse
+
+					} else if bytes.Equal(ffjKeyIPLocationCountryName, kn) {
+						currentKey = ffjtIPLocationCountryName
+						state = fflib.FFParse_want_colon
+						goto mainparse
+					}
+
+				case 'i':
+
+					if bytes.Equal(ffjKeyIPLocationIP, kn) {
+						currentKey = ffjtIPLocationIP
+						state = fflib.FFParse_want_colon
+						goto mainparse
+					}
+
+				case 'l':
+
+					if bytes.Equal(ffjKeyIPLocationLatitude, kn) {
+						currentKey = ffjtIPLocationLatitude
+						state = fflib.FFParse_want_colon
+						goto mainparse
+
+					} else if bytes.Equal(ffjKeyIPLocationLocation, kn) {
+						currentKey = ffjtIPLocationLocation
+						state = fflib.FFParse_want_colon
+						goto mainparse
+
+					} else if bytes.Equal(ffjKeyIPLocationLongitude, kn) {
+						currentKey = ffjtIPLocationLongitude
+						state = fflib.FFParse_want_colon
+						goto mainparse
+					}
+
+				case 'r':
+
+					if bytes.Equal(ffjKeyIPLocationRegionCode, kn) {
+						currentKey = ffjtIPLocationRegionCode
+						state = fflib.FFParse_want_colon
+						goto mainparse
+
+					} else if bytes.Equal(ffjKeyIPLocationRegionName, kn) {
+						currentKey = ffjtIPLocationRegionName
+						state = fflib.FFParse_want_colon
+						goto mainparse
+					}
+
+				case 't':
+
+					if bytes.Equal(ffjKeyIPLocationType, kn) {
+						currentKey = ffjtIPLocationType
+						state = fflib.FFParse_want_colon
+						goto mainparse
+					}
+
+				case 'z':
+
+					if bytes.Equal(ffjKeyIPLocationZip, kn) {
+						currentKey = ffjtIPLocationZip
+						state = fflib.FFParse_want_colon
+						goto mainparse
+					}
+
+				}
+
+				if fflib.SimpleLetterEqualFold(ffjKeyIPLocationZip, kn) {
+					currentKey = ffjtIPLocationZip
+					state = fflib.FFParse_want_colon
+					goto mainparse
+				}
+
+				if fflib.SimpleLetterEqualFold(ffjKeyIPLocationType, kn) {
+					currentKey = ffjtIPLocationType
+					state = fflib.FFParse_want_colon
+					goto mainparse
+				}
+
+				if fflib.AsciiEqualFold(ffjKeyIPLocationRegionName, kn) {
+					currentKey = ffjtIPLocationRegionName
+					state = fflib.FFParse_want_colon
+					goto mainparse
+				}
+
+				if fflib.AsciiEqualFold(ffjKeyIPLocationRegionCode, kn) {
+					currentKey = ffjtIPLocationRegionCode
+					state = fflib.FFParse_want_colon
+					goto mainparse
+				}
+
+				if fflib.SimpleLetterEqualFold(ffjKeyIPLocationLongitude, kn) {
+					currentKey = ffjtIPLocationLongitude
+					state = fflib.FFParse_want_colon
+					goto mainparse
+				}
+
+				if fflib.SimpleLetterEqualFold(ffjKeyIPLocationLocation, kn) {
+					currentKey = ffjtIPLocationLocation
+					state = fflib.FFParse_want_colon
+					goto mainparse
+				}
+
+				if fflib.SimpleLetterEqualFold(ffjKeyIPLocationLatitude, kn) {
+					currentKey = ffjtIPLocationLatitude
+					state = fflib.FFParse_want_colon
+					goto mainparse
+				}
+
+				if fflib.SimpleLetterEqualFold(ffjKeyIPLocationIP, kn) {
+					currentKey = ffjtIPLocationIP
+					state = fflib.FFParse_want_colon
+					goto mainparse
+				}
+
+				if fflib.AsciiEqualFold(ffjKeyIPLocationCountryName, kn) {
+					currentKey = ffjtIPLocationCountryName
+					state = fflib.FFParse_want_colon
+					goto mainparse
+				}
+
+				if fflib.AsciiEqualFold(ffjKeyIPLocationCountryCode, kn) {
+					currentKey = ffjtIPLocationCountryCode
+					state = fflib.FFParse_want_colon
+					goto mainparse
+				}
+
+				if fflib.AsciiEqualFold(ffjKeyIPLocationContinentName, kn) {
+					currentKey = ffjtIPLocationContinentName
+					state = fflib.FFParse_want_colon
+					goto mainparse
+				}
+
+				if fflib.AsciiEqualFold(ffjKeyIPLocationContinentCode, kn) {
+					currentKey = ffjtIPLocationContinentCode
+					state = fflib.FFParse_want_colon
+					goto mainparse
+				}
+
+				if fflib.SimpleLetterEqualFold(ffjKeyIPLocationCity, kn) {
+					currentKey = ffjtIPLocationCity
+					state = fflib.FFParse_want_colon
+					goto mainparse
+				}
+
+				currentKey = ffjtIPLocationnosuchkey
+				state = fflib.FFParse_want_colon
+				goto mainparse
+			}
+
+		case fflib.FFParse_want_colon:
+			if tok != fflib.FFTok_colon {
+				wantedTok = fflib.FFTok_colon
+				goto wrongtokenerror
+			}
+			state = fflib.FFParse_want_value
+			continue
+		case fflib.FFParse_want_value:
+
+			if tok == fflib.FFTok_left_brace || tok == fflib.FFTok_left_bracket || tok == fflib.FFTok_integer || tok == fflib.FFTok_double || tok == fflib.FFTok_string || tok == fflib.FFTok_bool || tok == fflib.FFTok_null {
+				switch currentKey {
+
+				case ffjtIPLocationCity:
+					goto handle_City
+
+				case ffjtIPLocationContinentCode:
+					goto handle_ContinentCode
+
+				case ffjtIPLocationContinentName:
+					goto handle_ContinentName
+
+				case ffjtIPLocationCountryCode:
+					goto handle_CountryCode
+
+				case ffjtIPLocationCountryName:
+					goto handle_CountryName
+
+				case ffjtIPLocationIP:
+					goto handle_IP
+
+				case ffjtIPLocationLatitude:
+					goto handle_Latitude
+
+				case ffjtIPLocationLocation:
+					goto handle_Location
+
+				case ffjtIPLocationLongitude:
+					goto handle_Longitude
+
+				case ffjtIPLocationRegionCode:
+					goto handle_RegionCode
+
+				case ffjtIPLocationRegionName:
+					goto handle_RegionName
+
+				case ffjtIPLocationType:
+					goto handle_Type
+
+				case ffjtIPLocationZip:
+					goto handle_Zip
+
+				case ffjtIPLocationnosuchkey:
+					err = fs.SkipField(tok)
+					if err != nil {
+						return fs.WrapErr(err)
+					}
+					state = fflib.FFParse_after_value
+					goto mainparse
+				}
+			} else {
+				goto wantedvalue
+			}
+		}
+	}
+
+handle_City:
+
+	/* handler: j.City type=interface {} kind=interface quoted=false*/
+
+	{
+		/* Falling back. type=interface {} kind=interface */
+		tbuf, err := fs.CaptureField(tok)
+		if err != nil {
+			return fs.WrapErr(err)
+		}
+
+		err = json.Unmarshal(tbuf, &j.City)
+		if err != nil {
+			return fs.WrapErr(err)
+		}
+	}
+
+	state = fflib.FFParse_after_value
+	goto mainparse
+
+handle_ContinentCode:
+
+	/* handler: j.ContinentCode type=string kind=string quoted=false*/
+
+	{
+
+		{
+			if tok != fflib.FFTok_string && tok != fflib.FFTok_null {
+				return fs.WrapErr(fmt.Errorf("cannot unmarshal %s into Go value for string", tok))
+			}
+		}
+
+		if tok == fflib.FFTok_null {
+
+		} else {
+
+			outBuf := fs.Output.Bytes()
+
+			j.ContinentCode = string(string(outBuf))
+
+		}
+	}
+
+	state = fflib.FFParse_after_value
+	goto mainparse
+
+handle_ContinentName:
+
+	/* handler: j.ContinentName type=string kind=string quoted=false*/
+
+	{
+
+		{
+			if tok != fflib.FFTok_string && tok != fflib.FFTok_null {
+				return fs.WrapErr(fmt.Errorf("cannot unmarshal %s into Go value for string", tok))
+			}
+		}
+
+		if tok == fflib.FFTok_null {
+
+		} else {
+
+			outBuf := fs.Output.Bytes()
+
+			j.ContinentName = string(string(outBuf))
+
+		}
+	}
+
+	state = fflib.FFParse_after_value
+	goto mainparse
+
+handle_CountryCode:
+
+	/* handler: j.CountryCode type=string kind=string quoted=false*/
+
+	{
+
+		{
+			if tok != fflib.FFTok_string && tok != fflib.FFTok_null {
+				return fs.WrapErr(fmt.Errorf("cannot unmarshal %s into Go value for string", tok))
+			}
+		}
+
+		if tok == fflib.FFTok_null {
+
+		} else {
+
+			outBuf := fs.Output.Bytes()
+
+			j.CountryCode = string(string(outBuf))
+
+		}
+	}
+
+	state = fflib.FFParse_after_value
+	goto mainparse
+
+handle_CountryName:
+
+	/* handler: j.CountryName type=string kind=string quoted=false*/
+
+	{
+
+		{
+			if tok != fflib.FFTok_string && tok != fflib.FFTok_null {
+				return fs.WrapErr(fmt.Errorf("cannot unmarshal %s into Go value for string", tok))
+			}
+		}
+
+		if tok == fflib.FFTok_null {
+
+		} else {
+
+			outBuf := fs.Output.Bytes()
+
+			j.CountryName = string(string(outBuf))
+
+		}
+	}
+
+	state = fflib.FFParse_after_value
+	goto mainparse
+
+handle_IP:
+
+	/* handler: j.IP type=string kind=string quoted=false*/
+
+	{
+
+		{
+			if tok != fflib.FFTok_string && tok != fflib.FFTok_null {
+				return fs.WrapErr(fmt.Errorf("cannot unmarshal %s into Go value for string", tok))
+			}
+		}
+
+		if tok == fflib.FFTok_null {
+
+		} else {
+
+			outBuf := fs.Output.Bytes()
+
+			j.IP = string(string(outBuf))
+
+		}
+	}
+
+	state = fflib.FFParse_after_value
+	goto mainparse
+
+handle_Latitude:
+
+	/* handler: j.Latitude type=int64 kind=int64 quoted=false*/
+
+	{
+		if tok != fflib.FFTok_integer && tok != fflib.FFTok_null {
+			return fs.WrapErr(fmt.Errorf("cannot unmarshal %s into Go value for int64", tok))
+		}
+	}
+
+	{
+
+		if tok == fflib.FFTok_null {
+
+		} else {
+
+			tval, err := fflib.ParseInt(fs.Output.Bytes(), 10, 64)
+
+			if err != nil {
+				return fs.WrapErr(err)
+			}
+
+			j.Latitude = int64(tval)
+
+		}
+	}
+
+	state = fflib.FFParse_after_value
+	goto mainparse
+
+handle_Location:
+
+	/* handler: j.Location type=struct { CallingCode string "json:\"calling_code\""; Capital string "json:\"capital\""; CountryFlag string "json:\"country_flag\""; CountryFlagEmoji string "json:\"country_flag_emoji\""; CountryFlagEmojiUnicode string "json:\"country_flag_emoji_unicode\""; GeonameId interface {} "json:\"geoname_id\""; IsEu bool "json:\"is_eu\""; Languages []struct { Code string "json:\"code\""; Name string "json:\"name\""; Native string "json:\"native\"" } "json:\"languages\"" } kind=struct quoted=false*/
+
+	{
+		/* Falling back. type=struct { CallingCode string "json:\"calling_code\""; Capital string "json:\"capital\""; CountryFlag string "json:\"country_flag\""; CountryFlagEmoji string "json:\"country_flag_emoji\""; CountryFlagEmojiUnicode string "json:\"country_flag_emoji_unicode\""; GeonameId interface {} "json:\"geoname_id\""; IsEu bool "json:\"is_eu\""; Languages []struct { Code string "json:\"code\""; Name string "json:\"name\""; Native string "json:\"native\"" } "json:\"languages\"" } kind=struct */
+		tbuf, err := fs.CaptureField(tok)
+		if err != nil {
+			return fs.WrapErr(err)
+		}
+
+		err = json.Unmarshal(tbuf, &j.Location)
+		if err != nil {
+			return fs.WrapErr(err)
+		}
+	}
+
+	state = fflib.FFParse_after_value
+	goto mainparse
+
+handle_Longitude:
+
+	/* handler: j.Longitude type=int64 kind=int64 quoted=false*/
+
+	{
+		if tok != fflib.FFTok_integer && tok != fflib.FFTok_null {
+			return fs.WrapErr(fmt.Errorf("cannot unmarshal %s into Go value for int64", tok))
+		}
+	}
+
+	{
+
+		if tok == fflib.FFTok_null {
+
+		} else {
+
+			tval, err := fflib.ParseInt(fs.Output.Bytes(), 10, 64)
+
+			if err != nil {
+				return fs.WrapErr(err)
+			}
+
+			j.Longitude = int64(tval)
+
+		}
+	}
+
+	state = fflib.FFParse_after_value
+	goto mainparse
+
+handle_RegionCode:
+
+	/* handler: j.RegionCode type=interface {} kind=interface quoted=false*/
+
+	{
+		/* Falling back. type=interface {} kind=interface */
+		tbuf, err := fs.CaptureField(tok)
+		if err != nil {
+			return fs.WrapErr(err)
+		}
+
+		err = json.Unmarshal(tbuf, &j.RegionCode)
+		if err != nil {
+			return fs.WrapErr(err)
+		}
+	}
+
+	state = fflib.FFParse_after_value
+	goto mainparse
+
+handle_RegionName:
+
+	/* handler: j.RegionName type=interface {} kind=interface quoted=false*/
+
+	{
+		/* Falling back. type=interface {} kind=interface */
+		tbuf, err := fs.CaptureField(tok)
+		if err != nil {
+			return fs.WrapErr(err)
+		}
+
+		err = json.Unmarshal(tbuf, &j.RegionName)
+		if err != nil {
+			return fs.WrapErr(err)
+		}
+	}
+
+	state = fflib.FFParse_after_value
+	goto mainparse
+
+handle_Type:
+
+	/* handler: j.Type type=string kind=string quoted=false*/
+
+	{
+
+		{
+			if tok != fflib.FFTok_string && tok != fflib.FFTok_null {
+				return fs.WrapErr(fmt.Errorf("cannot unmarshal %s into Go value for string", tok))
+			}
+		}
+
+		if tok == fflib.FFTok_null {
+
+		} else {
+
+			outBuf := fs.Output.Bytes()
+
+			j.Type = string(string(outBuf))
+
+		}
+	}
+
+	state = fflib.FFParse_after_value
+	goto mainparse
+
+handle_Zip:
+
+	/* handler: j.Zip type=interface {} kind=interface quoted=false*/
+
+	{
+		/* Falling back. type=interface {} kind=interface */
+		tbuf, err := fs.CaptureField(tok)
+		if err != nil {
+			return fs.WrapErr(err)
+		}
+
+		err = json.Unmarshal(tbuf, &j.Zip)
+		if err != nil {
+			return fs.WrapErr(err)
 		}
 	}
 
