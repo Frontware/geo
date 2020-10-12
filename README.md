@@ -2,8 +2,8 @@
 
 # Introduction
 
-# geo
-Golang library to handle common geo functions
+
+Golang library to handle common geo functions in Frontware applications.
 
 
 # Doc
