@@ -58,7 +58,7 @@ func SetIPStackAPI(key string) {
 }
 
 // LocateIP returns location based on IP address.
-// Serviced by IPStack.
+// Serviced by IPStack: https://ipstack.com/documentation
 // You must provide IPStack API key prior to use the function
 //  SetIPStackAPI("MY IP STACK KEY")
 //  fmt.Prinln(LocateIP ("10.8.2.1"))
