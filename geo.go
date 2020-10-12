@@ -16,7 +16,6 @@ import (
 
 //go:generate ffjson geo.go
 
-
 type (
 	Nominatim struct {
 		DisplayName string   `json:"display_name"`
@@ -51,6 +50,8 @@ type (
 // point coordinates are supplied in degrees and converted into rad. in the func
 // distance returned is METERS!!!!!!
 // http://en.wikipedia.org/wiki/Haversine_formula
+//  Here we get the distance 
+//  geo.Distance(13.76,100.50, 13.89, 101.12)
 func Distance(lat1, lon1, lat2, lon2 float64) float64 {
 	// convert to radians
 	// must cast radius as float to multiply later
