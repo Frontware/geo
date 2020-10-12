@@ -11,6 +11,7 @@ import (
 	"github.com/pquerna/ffjson/ffjson"
 )
 
+// rapidapi contains the API key to access rapidapi
 var rapidapi string
 
 // Set Rapid API key
