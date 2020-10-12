@@ -16,20 +16,6 @@ import (
 
 //go:generate ffjson geo.go
 
-// rapidapi contains the API key to access rapidapi
-var rapidapi string
-var ipstackeapi string
-
-// Set Rapid API key
-func SetRapidAPI(key string) {
-	rapidapi = key
-}
-
-// SetIPStackAPI set the API key for IPSTACK
-// Get the key here https://ipstack.com/quickstart
-func SetIPStackAPI(key string) {
-	ipstackeapi = key
-}
 
 type (
 	Nominatim struct {
@@ -59,12 +45,10 @@ type (
 )
 
 // Distance function returns the distance (in meters) between two points of
-//     a given longitude and latitude relatively accurately (using a spherical
-//     approximation of the Earth) through the Haversin Distance Formula for
-//     great arc distance on a sphere with accuracy for small distances
-//
+// a given longitude and latitude relatively accurately (using a spherical
+// approximation of the Earth) through the Haversin Distance Formula for
+// great arc distance on a sphere with accuracy for small distances
 // point coordinates are supplied in degrees and converted into rad. in the func
-//
 // distance returned is METERS!!!!!!
 // http://en.wikipedia.org/wiki/Haversine_formula
 func Distance(lat1, lon1, lat2, lon2 float64) float64 {

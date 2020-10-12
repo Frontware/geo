@@ -40,6 +40,28 @@ type IPLocation struct {
 	Zip        interface{} `json:"zip"`
 }
 
+var (
+	// rapidapi contains the API key to access rapidapi
+	rapidapi    string
+	ipstackeapi string
+)
+
+// Set Rapid API key
+func SetRapidAPI(key string) {
+	rapidapi = key
+}
+
+// SetIPStackAPI set the API key for IPSTACK
+// Get the key here https://ipstack.com/quickstart
+func SetIPStackAPI(key string) {
+	ipstackeapi = key
+}
+
+// LocateIP returns location based on IP address.
+// Serviced by IPStack.
+// You must provide IPStack API key prior to use the function
+//  SetIPStackAPI("MY IP STACK KEY")
+//  fmt.Prinln(LocateIP ("10.8.2.1"))
 func LocateIP(ip string) (loc IPLocation, err error) {
 	if ip == "" || ipstackeapi == "" {
 		err = errors.New("Missing")
