@@ -11,6 +11,12 @@ Calculate distance in km between 2 coordinates, get address based on coordinates
 Some functions use online API requiring API key.
 
 
+# Go Playground
+
+
+[![Try it on Go playground](https://img.shields.io/static/v1?label=Golang&message=Playground&color=blue)](https://play.golang.org/p/Av09V987_Rn)
+
+
 # Doc
 
 See the doc online
