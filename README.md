@@ -4,3 +4,14 @@
 
 # geo
 Golang library to handle common geo functions
+
+
+# Doc
+
+See the doc online
+
+[![PkgGoDev](https://pkg.go.dev/badge/github.com/frontware/geo)](https://pkg.go.dev/github.com/frontware/geo)
+
+
+-----------------------------------------------
+<sup>© 2020 Frontware International. All Rights Reserved.</sup>

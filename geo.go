@@ -1,3 +1,6 @@
+// Copyright Frontware International
+// This package is used by several Frontware projects to handle basic tasks about geo location
+
 package geo
 
 import (
