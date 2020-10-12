@@ -6,7 +6,7 @@
 Golang library to handle common geo functions in Frontware applications.
 
 
-Calculate distnace in km between 2 coordinates, get address based on coordinates, get location based on IP.
+Calculate distance in km between 2 coordinates, get address based on coordinates, get location based on IP, ...
 
 Some functions use online API requiring API key.
 

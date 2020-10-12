@@ -114,6 +114,7 @@ func SetGoogleAPI(key string) {
 }
 
 // GeoCode get coordinates based on address from Google Service.
+//  GeoCode("Avenue Louise 24, Bruxelles, Belgium","en")
 func GeoCode(address, lg string) (g GooglePlace, err error) {
 	if address == "" || googleAPI == "" {
 		err = errors.New("Missing")

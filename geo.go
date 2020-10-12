@@ -37,6 +37,7 @@ type (
 		Address     *Address `json:"address"`
 	}
 
+	// Address use to query Mapstreet for reverse geo location
 	Address struct {
 		Country  string `json:"country_code"`
 		Road     string `json:"road"`
@@ -85,6 +86,7 @@ func Distance(lat1, lon1, lat2, lon2 float64) float64 {
 
 // Nominatim returns location name based on coordinates from openstreetmap API
 // We wait 1 second before start because there is a rate limitation of 1 request per second
+//  Reverse (13.7665269,100.6068431)
 func Reverse(lat, lon float64) (address Nominatim, err error) {
 	// curl "https://nominatim.openstreetmap.org/reverse?format=json&lat=18.8094923&lon=98.968031&zoom=18&addressdetails=1"
 
@@ -108,6 +110,7 @@ func Reverse(lat, lon float64) (address Nominatim, err error) {
 }
 
 // GeoLocate returns coordinates based on address
+//   GeoLocate(geo.Address{City:"Bangkok","Road":"Latprao 94, Town in Town",PostCode:10310})
 func GeoLocate(address Address) (lat, long float64) {
 	// curl "https://nominatim.openstreetmap.org/search/query?city=ottignies&street=pinchart 31&format=json
 
