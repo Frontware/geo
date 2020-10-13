@@ -1,5 +1,3 @@
-[![Go Report Card](https://goreportcard.com/badge/github.com/frontware/geo)](https://goreportcard.com/report/github.com/frontware/geo)
-
 [<img src="https://www.frontware.com/images/img/fw-logo.png" alt="Frontware" width="100"/>](https://frontware.com)
 
 # Introduction
@@ -12,7 +10,7 @@ Calculate distance in km between 2 coordinates, get address based on coordinates
 
 Some functions use online API requiring API key.
 
-[![Frontware](https://img.shields.io/badge/Developed%20by-Frontware-yellowgreen.svg)](https://www.frontware.com)
+[![Frontware](https://img.shields.io/badge/Developed%20by-Frontware-yellowgreen.svg)](https://www.frontware.com) [![Go Report Card](https://goreportcard.com/badge/github.com/frontware/geo)](https://goreportcard.com/report/github.com/frontware/geo)
 
 # Go Playground
 
@@ -24,7 +22,7 @@ Some functions use online API requiring API key.
 
 See the doc online
 
-[![PkgGoDev](https://pkg.go.dev/badge/github.com/frontware/geo)](https://pkg.go.dev/github.com/frontware/geo)
+[![PkgGoDev](https://pkg.go.dev/badge/github.com/frontware/geo)](https://pkg.go.dev/github.com/frontware/geo) 
 
 
 -----------------------------------------------
