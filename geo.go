@@ -31,6 +31,7 @@ type (
 		Region   string `json:"state"`
 	}
 
+	// Place is the struct of a geo place from nominatim.
 	Place struct {
 		Lat         float64 `json:"lat"`
 		Long        float64 `json:"lon"`
@@ -123,6 +124,10 @@ func GeoLocate(address Address) (lat, long float64) {
 
 	var places []Place
 	body, err := ioutil.ReadAll(res.Body)
+
+	if err != nil {
+		return
+	}
 
 	if err = ffjson.Unmarshal(body, &places); err == nil && len(places) > 0 {
 		lat = places[0].Lat

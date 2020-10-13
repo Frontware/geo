@@ -29,7 +29,7 @@ type (
 		ToShow          bool       `json:"toShow,omitempty" bson:"toShow,omitempty"` // Set to true if we have to show it on Venue page
 	}
 
-	// GoogleOpeningHours
+	// GoogleOpeningHours is the structure of Open hours returned by Google API.
 	GoogleOpeningHours struct {
 		OpenNow bool `json:"open_now"` // is a boolean value indicating if the place is open at the current time
 		// WeekdayText is an array of seven strings representing the formatted opening hours for each day of the week.
@@ -51,6 +51,7 @@ type (
 		}
 	}
 
+	// GooglePlace structure returned by Google API to describe a place.
 	GooglePlace struct {
 		Geometry struct {
 			LocationType string `json:"location_type "` // APPROXIMATE, RANGE_INTERPOLATED

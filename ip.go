@@ -11,6 +11,7 @@ import (
 
 //go:generate ffjson ip.go
 
+// IPLocation structure of data returned by LocateIP() . ipstack Web Service.
 type IPLocation struct {
 	City          interface{} `json:"city"`
 	ContinentCode string      `json:"continent_code"`
