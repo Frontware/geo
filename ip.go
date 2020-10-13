@@ -87,7 +87,7 @@ func LocateIP(ip string) (loc IPLocation, err error) {
 
 // returns geo info based on IP
 // Details https://rapidapi.com/apility.io/api/ip-geolocation
-// WIP
+// WIP.
 func IPGeocode(ip string) (err error) {
 	if ip == "" || rapidapi == "" {
 		err = errors.New("Missing")

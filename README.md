@@ -10,6 +10,7 @@ Calculate distance in km between 2 coordinates, get address based on coordinates
 
 Some functions use online API requiring API key.
 
+[![Frontware](https://img.shields.io/badge/Developed%20by-Frontware-yellowgreen.svg)](https://www.frontware.com)
 
 # Go Playground
 
