@@ -50,7 +50,7 @@ type (
 // point coordinates are supplied in degrees and converted into rad. in the func
 // distance returned is METERS!!!!!!
 // http://en.wikipedia.org/wiki/Haversine_formula
-//  Here we get the distance 
+//  Here we get the distance
 //  geo.Distance(13.76,100.50, 13.89, 101.12)
 func Distance(lat1, lon1, lat2, lon2 float64) float64 {
 	// convert to radians
@@ -69,9 +69,9 @@ func Distance(lat1, lon1, lat2, lon2 float64) float64 {
 	return 2 * r * math.Asin(math.Sqrt(h))
 }
 
-// Nominatim returns location name based on coordinates from openstreetmap API
+// Reverse returns location name based on coordinates from openstreetmap API
 // We wait 1 second before start because there is a rate limitation of 1 request per second
-//  Reverse (13.7665269,100.6068431)
+//  Reverse(13.7665269,100.6068431)
 func Reverse(lat, lon float64) (address Nominatim, err error) {
 	// curl "https://nominatim.openstreetmap.org/reverse?format=json&lat=18.8094923&lon=98.968031&zoom=18&addressdetails=1"
 

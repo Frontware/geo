@@ -51,7 +51,7 @@ func SetRapidAPI(key string) {
 	rapidapi = key
 }
 
-// SetIPStackAPI set the API key for IPSTACK
+// SetIPStackAPI set the API key for IPSTACK.
 // Get the key here https://ipstack.com/quickstart
 func SetIPStackAPI(key string) {
 	ipstackeapi = key
@@ -85,8 +85,9 @@ func LocateIP(ip string) (loc IPLocation, err error) {
 	return
 }
 
-// IPGeocode returns geo info based on IP
+// returns geo info based on IP
 // Details https://rapidapi.com/apility.io/api/ip-geolocation
+// WIP
 func IPGeocode(ip string) (err error) {
 	if ip == "" || rapidapi == "" {
 		err = errors.New("Missing")
