@@ -17,6 +17,7 @@ import (
 //go:generate ffjson geo.go
 
 type (
+	// Nominatim is address structure returned by nominatim API.
 	Nominatim struct {
 		DisplayName string   `json:"display_name"`
 		Address     *Address `json:"address"`
