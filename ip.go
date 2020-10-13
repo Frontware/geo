@@ -47,7 +47,7 @@ var (
 	ipstackeapi string
 )
 
-// Set Rapid API key
+// SetRapidAPI set the API Key for rapidAPI service.
 func SetRapidAPI(key string) {
 	rapidapi = key
 }
