@@ -1,3 +1,5 @@
+[![Go Report Card](https://goreportcard.com/badge/github.com/frontware/geo)](https://goreportcard.com/report/github.com/frontware/geo)
+
 [<img src="https://www.frontware.com/images/img/fw-logo.png" alt="Frontware" width="100"/>](https://frontware.com)
 
 # Introduction
