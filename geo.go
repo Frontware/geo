@@ -5,7 +5,7 @@ package geo
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
 	"math"
 	"net/http"
 	"net/url"
@@ -91,7 +91,7 @@ func Reverse(lat, lon float64) (address Nominatim, err error) {
 		res.Body.Close()
 	}()
 
-	body, err := ioutil.ReadAll(res.Body)
+	body, err := io.ReadAll(res.Body)
 	err = address.UnmarshalJSON(body)
 	return
 }
@@ -124,7 +124,7 @@ func GeoLocate(address Address) (lat, long float64) {
 	}()
 
 	var places []Place
-	body, err := ioutil.ReadAll(res.Body)
+	body, err := io.ReadAll(res.Body)
 
 	if err != nil {
 		return
