@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"time"
 )
@@ -108,7 +108,7 @@ func ipGeocode(ip string) (err error) {
 	}
 
 	defer res.Body.Close()
-	body, _ := ioutil.ReadAll(res.Body)
+	body, _ := io.ReadAll(res.Body)
 	// TODO : still have to return value
 	fmt.Println(res)
 	fmt.Println(string(body))
@@ -156,7 +156,7 @@ func GetLocationFromIP(ip string) (ipapi IPAPI, err error) {
 	}
 	defer resp.Body.Close()
 	var body []byte
-	body, err = ioutil.ReadAll(resp.Body)
+	body, err = io.ReadAll(resp.Body)
 	if err != nil {
 		return
 	}
